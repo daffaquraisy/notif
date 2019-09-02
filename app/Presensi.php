@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    protected $table = 'tb_guru';
+    protected $table = 'tb_absen';
     protected $guarded = [];
-    protected $fillable = ['kode_guru', 'nama_guru', 'tlp_guru'];
+    protected $fillable = ['nis', 'nama_siswa', 'tanggal', 'keterangan'];
 }

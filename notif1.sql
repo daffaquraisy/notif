@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Sep 2019 pada 07.07
+-- Waktu pembuatan: 02 Sep 2019 pada 16.41
 -- Versi server: 10.1.39-MariaDB
 -- Versi PHP: 7.3.5
 
@@ -36,6 +36,14 @@ CREATE TABLE `tb_absen` (
   `keterangan` enum('presensi','ijin','sakit','alpa','dispen') COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Dumping data untuk tabel `tb_absen`
+--
+
+INSERT INTO `tb_absen` (`presensi_id`, `tanggal`, `nis`, `nama_siswa`, `keterangan`) VALUES
+(1, '2019-09-02', 625156, 'daffa', 'sakit'),
+(2, '2019-09-03', 635242, 'ferdi', 'sakit');
+
 -- --------------------------------------------------------
 
 --
@@ -57,10 +65,8 @@ CREATE TABLE `tb_guru` (
 INSERT INTO `tb_guru` (`id_guru`, `kode_guru`, `nama_guru`, `password_guru`, `tlp_guru`) VALUES
 (5, '64', 'Muhamad Ramdani, S.Kom', 'danid04nk', '0896349038108'),
 (7, '70', 'Taufik, S.kom', 'taufik', '089672202828'),
-(8, '1', 'daffa', '$2y$10$uDH.3HSidkOTd3bAMLeD/.VxhqL2xTK3dTKOapBpZtvFxAqeQG8CS', '0862622'),
-(11, '12', 'daffaq', '$2y$10$9pPpXu9If13juYySibsWW.BIKJHwB3kT53p5bfo4zgg.nVInkCAwO', '62'),
-(12, '54', 'deki', '$2y$10$LfYVGw3mCzAv3EwDX3oKb.cz46Sw.pDYrDEzZEW7/msmbz/i4maTi', '087655232'),
-(13, '54', 'Arif', '$2y$10$ek/HYxAhGqACrlUlIvE3POIRb28Vycvm/bono5oBDs314A.qPjBNS', '087655232');
+(14, '54', 'Arif', '$2y$10$FLWAbaPNsFLue3tXbBSXmOC5wpKVgnqqyF1FTw5CjqhQ9Yi6REDgm', '087655232'),
+(15, '1', 'daffa', '$2y$10$9eHaddxuZwPJ8iLkKetGV.o9CzsC/Au0cxkGsyn5/7xRUqb.Rg./W', '62');
 
 -- --------------------------------------------------------
 
@@ -69,21 +75,22 @@ INSERT INTO `tb_guru` (`id_guru`, `kode_guru`, `nama_guru`, `password_guru`, `tl
 --
 
 CREATE TABLE `tb_kbm` (
-  `tanggal` date DEFAULT NULL,
-  `kelas` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
-  `hari` char(10) COLLATE latin1_general_ci DEFAULT NULL,
-  `jam1` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
-  `jam2` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
-  `jam3` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
-  `jam4` varchar(100) COLLATE latin1_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+  `id_kbm` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `hari` char(10) NOT NULL,
+  `jam1` varchar(100) NOT NULL,
+  `jam2` varchar(100) NOT NULL,
+  `jam3` varchar(100) NOT NULL,
+  `jam4` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_kbm`
 --
 
-INSERT INTO `tb_kbm` (`tanggal`, `kelas`, `hari`, `jam1`, `jam2`, `jam3`, `jam4`) VALUES
-('2019-08-15', 'XII TKJ', 'Senin', 'Agama', 'Sbk', 'Matematika', 'B. Indonesia');
+INSERT INTO `tb_kbm` (`id_kbm`, `tanggal`, `hari`, `jam1`, `jam2`, `jam3`, `jam4`) VALUES
+(1, '2019-09-02', 'Senin', 'TIK', 'IPS', 'PKN', 'Design Grafis'),
+(2, '2019-09-02', 'Senin', 'Web Programming', 'OOP', 'Basis Data', 'UML');
 
 -- --------------------------------------------------------
 
@@ -97,9 +104,24 @@ CREATE TABLE `tb_kelas` (
   `tanggal` date DEFAULT NULL,
   `id_kbm` char(10) COLLATE latin1_general_ci DEFAULT NULL,
   `id_guru` char(10) COLLATE latin1_general_ci DEFAULT NULL,
-  `judul_materi` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
-  `pr` varchar(100) COLLATE latin1_general_ci DEFAULT NULL
+  `judul_materi1` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `judul_materi2` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `judul_materi3` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `judul_materi4` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `pr1` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `pr2` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `pr3` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `pr4` varchar(100) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_kelas`
+--
+
+INSERT INTO `tb_kelas` (`id_kelas`, `kelas`, `tanggal`, `id_kbm`, `id_guru`, `judul_materi1`, `judul_materi2`, `judul_materi3`, `judul_materi4`, `pr1`, `pr2`, `pr3`, `pr4`) VALUES
+(1, 'X', '2019-09-02', '1', '5', 'Web', 'Teknik Jaringan', 'Design Grafis', 'B Indo', 'Tidak ada', 'Tidak ada', 'Praktik', 'Survey'),
+(2, 'XII', '2019-09-02', '1', '7', 'Conversation', 'Pidato', 'Wawancara', 'Baca', 'LKS hal 25', 'Lanjtkan  Catatan MTK', 'Tidak ada', 'Tidak ada'),
+(3, 'XII', '2019-09-06', '1', '5', 'ini materi 1', 'ini materi 2', 'ini materi 3', 'ini materi 4', 'ini pr 1', 'ini pr 2', 'ini pr 3', 'ini pr 4');
 
 -- --------------------------------------------------------
 
@@ -147,7 +169,8 @@ INSERT INTO `tb_siswa` (`id_siswa`, `nis`, `nama_siswa`, `password_siswa`, `kela
 (23, 136, 'Ananda Prayoga', 'ananda123', 'XII RPL', 'Jl Warung Bandrek', '089685946505'),
 (24, 137, 'Rizal Alatas', 'rizal123', 'XII TKJ', 'Bondongan', '089634903811'),
 (25, 138, 'Syalwa Fajrilianti Zahra', 'syalwa123', 'X RPL', 'cimanglid', '085765435445'),
-(31, 1991, 'nini', 'nini', 'XI RPL', 'nana bela sari Rt. 01', '099090');
+(31, 1991, 'nini', 'nini', 'XI RPL', 'nana bela sari Rt. 01', '099090'),
+(33, 456, 'Daffa', '$2y$10$twyJ3a2/q2KPkUnWnPHhpOdEdc.KspfhHfWQHRmuM9hxa.rNdRdQm', 'XII RPL', 'paledang', '43443434343');
 
 -- --------------------------------------------------------
 
@@ -187,6 +210,12 @@ ALTER TABLE `tb_guru`
   ADD PRIMARY KEY (`id_guru`);
 
 --
+-- Indeks untuk tabel `tb_kbm`
+--
+ALTER TABLE `tb_kbm`
+  ADD PRIMARY KEY (`id_kbm`);
+
+--
 -- Indeks untuk tabel `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
@@ -212,25 +241,31 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `tb_absen`
 --
 ALTER TABLE `tb_absen`
-  MODIFY `presensi_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `presensi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_guru`
 --
 ALTER TABLE `tb_guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_kbm`
+--
+ALTER TABLE `tb_kbm`
+  MODIFY `id_kbm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`

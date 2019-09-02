@@ -21,6 +21,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'kode_guru', 'nama_guru', 'tlp_guru', 'password_guru'
     ];
 
+
     /**
      * The attributes excluded from the model's JSON form.
      *

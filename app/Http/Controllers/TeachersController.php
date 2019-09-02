@@ -14,7 +14,7 @@ class TeachersController extends Controller
         $data = DB::table('tb_guru')
             ->select('kode_guru', 'nama_guru', 'tlp_guru')
             ->get();
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     public function show($id)
@@ -23,7 +23,7 @@ class TeachersController extends Controller
             ->select('kode_guru', 'nama_guru', 'tlp_guru')
             ->where('id_guru', $id)
             ->get();
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     public function store(Request $request)
