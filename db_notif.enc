@@ -1,0 +1,123 @@
+/*
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.5.39 : Database - db_notif
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_notif` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `db_notif`;
+
+/*Table structure for table `tb_absen` */
+
+DROP TABLE IF EXISTS `tb_absen`;
+
+CREATE TABLE `tb_absen` (
+  `presensi_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tanggal` date DEFAULT NULL,
+  `nis` int(11) DEFAULT NULL,
+  `nama_siswa` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `keterangan` enum('presensi','ijin','sakit','alpa','dispen') COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`presensi_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+/*Data for the table `tb_absen` */
+
+/*Table structure for table `tb_guru` */
+
+DROP TABLE IF EXISTS `tb_guru`;
+
+CREATE TABLE `tb_guru` (
+  `id_guru` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_guru` char(10) COLLATE latin1_general_ci NOT NULL,
+  `nama_guru` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `password_guru` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `tlp_guru` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_guru`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+/*Data for the table `tb_guru` */
+
+insert  into `tb_guru`(`id_guru`,`kode_guru`,`nama_guru`,`password_guru`,`tlp_guru`) values (5,'64','Muhamad Ramdani, S.Kom','danid04nk','0896349038108'),(7,'70','Taufik, S.kom','taufik','089672202828');
+
+/*Table structure for table `tb_kbm` */
+
+DROP TABLE IF EXISTS `tb_kbm`;
+
+CREATE TABLE `tb_kbm` (
+  `tanggal` date DEFAULT NULL,
+  `kelas` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `hari` char(10) COLLATE latin1_general_ci DEFAULT NULL,
+  `jam1` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `jam2` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `jam3` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `jam4` varchar(100) COLLATE latin1_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+/*Data for the table `tb_kbm` */
+
+insert  into `tb_kbm`(`tanggal`,`kelas`,`hari`,`jam1`,`jam2`,`jam3`,`jam4`) values ('2019-08-15','XI TKJ','Senin','Agama','Sbk','Matematika','B. Indonesia');
+
+/*Table structure for table `tb_kelas` */
+
+DROP TABLE IF EXISTS `tb_kelas`;
+
+CREATE TABLE `tb_kelas` (
+  `id_kelas` int(11) NOT NULL AUTO_INCREMENT,
+  `kelas` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `id_kbm` char(10) COLLATE latin1_general_ci DEFAULT NULL,
+  `id_guru` char(10) COLLATE latin1_general_ci DEFAULT NULL,
+  `judul_materi` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `pr` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_kelas`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+/*Data for the table `tb_kelas` */
+
+/*Table structure for table `tb_siswa` */
+
+DROP TABLE IF EXISTS `tb_siswa`;
+
+CREATE TABLE `tb_siswa` (
+  `id_siswa` int(11) NOT NULL AUTO_INCREMENT,
+  `nis` int(11) DEFAULT NULL,
+  `nama_siswa` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `password_siswa` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `kelas` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `alamat` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `telp_siswa` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_siswa`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+/*Data for the table `tb_siswa` */
+
+insert  into `tb_siswa`(`id_siswa`,`nis`,`nama_siswa`,`password_siswa`,`kelas`,`alamat`,`telp_siswa`) values (1,111,'Hamzah Arfah','hamzah123','X RPL','bubulak','089634903810'),(2,113,'Muhamad Abdul Fahmi','fahmi123','X TKJ','Kebon Pedes','0857792365757'),(3,114,'Alfiansyah','alfiansyah123','XI RPL','Bojong Gede','085775429195'),(4,115,'Taufik Saefulloh','taufik123','XI TKJ','Ciomas','089757635437'),(5,116,'Mohammad Dimas Saputro','dimas123','XII RPL','Grobongan','085691696215'),(6,117,'Hendrawan','Bogor','XII TKJ','Bogor','085693069706'),(7,118,'Muhammad Zulkifli','zulkifli123','X RPL','Bogor','-'),(8,119,'Zulvan Lindan','zulvan123','X TKJ','Ciapus','082299039542'),(9,120,'adjpafok','fhjaskf','XI RPL','sdfkjk','sldgkjk'),(10,121,'Azkia Satria Virga Aztiandi','azkia123','XI TKJ','Tajur','087885549199'),(11,122,'Hendriansyach Nurhayanto','hendri123','XII RPL','Cikaret','081281283403'),(12,123,'Egi Septiagi','egi123','XII TKJ','Cikaret','085887912048'),(13,124,'Niki Rizki A','niki123','X RPL','Cibeureum','087870309610'),(14,126,'Wahyu Maulana Rifai','wahyu123','X TKJ','Bondongan','+6289520621475'),(15,127,'Adji Gimnastiar Putra','adji123','XI RPL','Perumahan Vila Tamansari','085782940530'),(16,129,'Muhammad Rizqi Ramadhan','rizqi123','XI TKJ','Pasir Jaya Muara','081281209010'),(17,130,'Muhamad Faisal Darmawan','faisal123','XII RPL','Dekeng','081902701249'),(18,131,'Nendi irawan','nendi123','XII TKJ','Pamoyanan','08581227772'),(19,132,'Fahmi','fahmi123','X RPL','Pamoyanan','089520168555'),(20,133,'Fajri Setiawan','fajri123','X TKJ','cimanglid','081617474882'),(21,134,'M Rian Ramadhan','rian123','XI RPL','Jl Jero Kuta Kaum','0895326769246'),(22,135,'Deri Abdul Aziz','deri123','XI TKJ','Cihideung','085714155507'),(23,136,'Ananda Prayoga','ananda123','XII RPL','Jl Warung Bandrek','089685946505'),(24,137,'Rizal Alatas','rizal123','XII TKJ','Bondongan','089634903811'),(25,138,'Syalwa Fajrilianti Zahra','syalwa123','X RPL','cimanglid','085765435445'),(31,1991,'nini','nini','XI RPL','nana bela sari Rt. 01','099090');
+
+/*Table structure for table `tb_user` */
+
+DROP TABLE IF EXISTS `tb_user`;
+
+CREATE TABLE `tb_user` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `password` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+/*Data for the table `tb_user` */
+
+insert  into `tb_user`(`id_user`,`username`,`password`) values (1,'dani','$2y$10$jk3dTadavgLhMgJVtOFidudqGvDXsCQG5fWoDRk8js1CjSRVrVhbe'),(2,'Taufik','D4305D7ED2EC97107CD6EB8DD4B6F6B7');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
