@@ -11,7 +11,8 @@ class PresensiController extends Controller
     public function index()
     {
         $data = DB::table('tb_absen')
-            ->select('nis', 'nama_siswa', 'tanggal', 'keterangan1', 'keterangan2', 'keterangan3', 'keterangan4')
+            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_absen.keterangan2', 'tb_absen.keterangan3', 'tb_absen.keterangan4', 'tb_kelas.judul_materi1', 'tb_kelas.judul_materi2', 'tb_kelas.judul_materi3', 'tb_kelas.judul_materi4', 'tb_kelas.pr1', 'tb_kelas.pr2', 'tb_kelas.pr3', 'tb_kelas.pr4')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
             ->get();
         return response()->json(['data' => $data]);
     }
@@ -79,6 +80,8 @@ class PresensiController extends Controller
             'id_kbm' => 'required'
         ]);
 
+
+
         $nis = $request->input('nis');
         $nama_siswa = $request->input('nama_siswa');
         $tanggal = $request->input('tanggal');
@@ -86,6 +89,8 @@ class PresensiController extends Controller
         $keterangan2 = $request->input('keterangan2');
         $keterangan3 = $request->input('keterangan3');
         $keterangan4 = $request->input('keterangan4');
+        $id_kelas = $request->input('id_kelas');
+        $id_kbm = $request->input('id_kbm');
         // $tanggal = Carbon\Carbon::now($request->input('tanggal'));
 
         $tambah = DB::table('tb_absen')->insert([
@@ -96,6 +101,8 @@ class PresensiController extends Controller
             'keterangan3' => $keterangan3,
             'keterangan4' => $keterangan4,
             'tanggal' => $tanggal,
+            'id_kbm' => $id_kbm,
+            'id_kelas' => $id_kelas
         ]);
 
         if ($tambah) {
@@ -108,6 +115,19 @@ class PresensiController extends Controller
                 'success' => false,
                 'message' => 'Gagal tambah data',
             ], 400);
+        }
+    }
+
+    public function apiSearch(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('tb_absen')
+                ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_absen.keterangan2', 'tb_absen.keterangan3', 'tb_absen.keterangan4', 'tb_kelas.judul_materi1', 'tb_kelas.judul_materi2', 'tb_kelas.judul_materi3', 'tb_kelas.judul_materi4', 'tb_kelas.pr1', 'tb_kelas.pr2', 'tb_kelas.pr3', 'tb_kelas.pr4')
+                ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+                ->where('tb_absen.tanggal', 'LIKE', '%' . $cari . '%')
+                ->simplePaginate(20);
+            return response()->json(['data' => $data]);
         }
     }
 }

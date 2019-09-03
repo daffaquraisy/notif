@@ -10,7 +10,7 @@ class KelasController extends Controller
     public function index()
     {
         $data = DB::table('tb_kelas')
-            ->select('tb_kelas.kelas', 'tb_kelas.tanggal', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kbm.jam1', 'tb_kelas.judul_materi1', 'tb_kelas.pr1', 'tb_kbm.jam2', 'tb_kelas.judul_materi2', 'tb_kelas.pr2', 'tb_kbm.jam3', 'tb_kelas.judul_materi3', 'tb_kelas.pr3', 'tb_kbm.jam4', 'tb_kelas.judul_materi4', 'tb_kelas.pr4')
+            ->select('tb_kelas.kelas1', 'tb_kelas.kelas2', 'tb_kelas.kelas3', 'tb_kelas.kelas4', 'tb_kelas.tanggal', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kbm.jam1', 'tb_kelas.judul_materi1', 'tb_kelas.pr1', 'tb_kbm.jam2', 'tb_kelas.judul_materi2', 'tb_kelas.pr2', 'tb_kbm.jam3', 'tb_kelas.judul_materi3', 'tb_kelas.pr3', 'tb_kbm.jam4', 'tb_kelas.judul_materi4', 'tb_kelas.pr4')
             ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_kelas.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_kelas.id_kbm')
             ->get();

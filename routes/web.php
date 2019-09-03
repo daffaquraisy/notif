@@ -31,6 +31,7 @@ $router->get('/absen/kelas3', 'PresensiController@kelas3');
 $router->get('/absen/kelas4', 'PresensiController@kelas4');
 $router->get('/absen/{id}', 'PresensiController@show');
 $router->post('/absen', 'PresensiController@store');
+$router->get('search/absen', 'PresensiController@apiSearch');
 
 $router->get('/kelas', 'KelasController@index');
 $router->get('/kelas/jam1', 'KelasController@kbmJam1');
@@ -39,6 +40,8 @@ $router->get('/kelas/jam3', 'KelasController@kbmJam3');
 $router->get('/kelas/jam4', 'KelasController@kbmJam4');
 // $router->get('/kelas/{id}', 'KelasController@show');
 $router->post('/kelas', 'KelasController@store');
+
+$router->post('/kbm', 'KbmController@store');
 
 $router->get('/key', function () {
     return str_random(32);
