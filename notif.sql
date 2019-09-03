@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Sep 2019 pada 03.04
+-- Waktu pembuatan: 03 Sep 2019 pada 04.05
 -- Versi server: 10.1.39-MariaDB
 -- Versi PHP: 7.3.5
 
@@ -46,7 +46,9 @@ CREATE TABLE `tb_absen` (
 --
 
 INSERT INTO `tb_absen` (`presensi_id`, `tanggal`, `nis`, `nama_siswa`, `keterangan1`, `keterangan2`, `keterangan3`, `keterangan4`, `id_kelas`, `id_kbm`) VALUES
-(3, '2019-09-03', 456, 'Daffa', 'presensi', 'alpa', 'alpa', 'presensi', '1', '1');
+(3, '2019-09-03', 456, 'Daffa', 'presensi', 'alpa', 'alpa', 'presensi', '1', '1'),
+(4, '2019-09-03', 654, 'Feri', 'presensi', 'ijin', 'sakit', 'presensi', '1', '1'),
+(5, '2019-09-04', 456, 'Daffa', 'presensi', 'presensi', 'presensi', 'presensi', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -80,8 +82,8 @@ INSERT INTO `tb_guru` (`id_guru`, `kode_guru`, `nama_guru`, `password_guru`, `tl
 
 CREATE TABLE `tb_kbm` (
   `id_kbm` int(11) NOT NULL,
-  `tanggal` date NOT NULL,
-  `hari` char(10) NOT NULL,
+  `tanggal` date DEFAULT NULL,
+  `hari` char(10) DEFAULT NULL,
   `jam1` varchar(100) NOT NULL,
   `jam2` varchar(100) NOT NULL,
   `jam3` varchar(100) NOT NULL,
@@ -94,7 +96,8 @@ CREATE TABLE `tb_kbm` (
 
 INSERT INTO `tb_kbm` (`id_kbm`, `tanggal`, `hari`, `jam1`, `jam2`, `jam3`, `jam4`) VALUES
 (1, '2019-09-02', 'Senin', 'TIK', 'IPS', 'PKN', 'Design Grafis'),
-(2, '2019-09-02', 'Senin', 'Web Programming', 'OOP', 'Basis Data', 'UML');
+(2, '2019-09-02', 'Senin', 'Web Programming', 'OOP', 'Basis Data', 'UML'),
+(3, NULL, NULL, 'PKN', 'IPS', 'IPA', 'MTK');
 
 -- --------------------------------------------------------
 
@@ -248,7 +251,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `tb_absen`
 --
 ALTER TABLE `tb_absen`
-  MODIFY `presensi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `presensi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_guru`
@@ -260,7 +263,7 @@ ALTER TABLE `tb_guru`
 -- AUTO_INCREMENT untuk tabel `tb_kbm`
 --
 ALTER TABLE `tb_kbm`
-  MODIFY `id_kbm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kbm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kelas`
