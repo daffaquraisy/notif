@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Sep 2019 pada 16.41
+-- Waktu pembuatan: 03 Sep 2019 pada 02.09
 -- Versi server: 10.1.39-MariaDB
 -- Versi PHP: 7.3.5
 
@@ -100,7 +100,10 @@ INSERT INTO `tb_kbm` (`id_kbm`, `tanggal`, `hari`, `jam1`, `jam2`, `jam3`, `jam4
 
 CREATE TABLE `tb_kelas` (
   `id_kelas` int(11) NOT NULL,
-  `kelas` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `kelas1` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `kelas2` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `kelas3` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `kelas4` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `id_kbm` char(10) COLLATE latin1_general_ci DEFAULT NULL,
   `id_guru` char(10) COLLATE latin1_general_ci DEFAULT NULL,
@@ -118,10 +121,10 @@ CREATE TABLE `tb_kelas` (
 -- Dumping data untuk tabel `tb_kelas`
 --
 
-INSERT INTO `tb_kelas` (`id_kelas`, `kelas`, `tanggal`, `id_kbm`, `id_guru`, `judul_materi1`, `judul_materi2`, `judul_materi3`, `judul_materi4`, `pr1`, `pr2`, `pr3`, `pr4`) VALUES
-(1, 'X', '2019-09-02', '1', '5', 'Web', 'Teknik Jaringan', 'Design Grafis', 'B Indo', 'Tidak ada', 'Tidak ada', 'Praktik', 'Survey'),
-(2, 'XII', '2019-09-02', '1', '7', 'Conversation', 'Pidato', 'Wawancara', 'Baca', 'LKS hal 25', 'Lanjtkan  Catatan MTK', 'Tidak ada', 'Tidak ada'),
-(3, 'XII', '2019-09-06', '1', '5', 'ini materi 1', 'ini materi 2', 'ini materi 3', 'ini materi 4', 'ini pr 1', 'ini pr 2', 'ini pr 3', 'ini pr 4');
+INSERT INTO `tb_kelas` (`id_kelas`, `kelas1`, `kelas2`, `kelas3`, `kelas4`, `tanggal`, `id_kbm`, `id_guru`, `judul_materi1`, `judul_materi2`, `judul_materi3`, `judul_materi4`, `pr1`, `pr2`, `pr3`, `pr4`) VALUES
+(1, 'X', 'X MM', 'XII TKJ', 'X RPL 2', '2019-09-02', '1', '5', 'Web', 'Teknik Jaringan', 'Design Grafis', 'B Indo', 'Tidak ada', 'Tidak ada', 'Praktik', 'Survey'),
+(2, 'XII', 'X TKJ 1', 'XI RPL 1', 'XII RPL 3', '2019-09-02', '1', '7', 'Conversation', 'Pidato', 'Wawancara', 'Baca', 'LKS hal 25', 'Lanjtkan  Catatan MTK', 'Tidak ada', 'Tidak ada'),
+(3, 'XII', 'X TKJ 1', 'X RPL 2', 'XII RPL 1', '2019-09-06', '1', '5', 'ini materi 1', 'ini materi 2', 'ini materi 3', 'ini materi 4', 'ini pr 1', 'ini pr 2', 'ini pr 3', 'ini pr 4');
 
 -- --------------------------------------------------------
 

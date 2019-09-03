@@ -20,7 +20,7 @@ class KelasController extends Controller
     public function kbmJam1()
     {
         $data = DB::table('tb_kelas')
-            ->select('tb_kelas.kelas', 'tb_kelas.tanggal', 'tb_kbm.jam1', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi1', 'tb_kelas.pr1')
+            ->select('tb_kelas.kelas1', 'tb_kelas.tanggal', 'tb_kbm.jam1', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi1', 'tb_kelas.pr1')
             ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_kelas.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_kelas.id_kbm')
             ->get();
@@ -30,7 +30,7 @@ class KelasController extends Controller
     public function kbmJam2()
     {
         $data = DB::table('tb_kelas')
-            ->select('tb_kelas.kelas', 'tb_kelas.tanggal', 'tb_kbm.jam2', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi2', 'tb_kelas.pr2')
+            ->select('tb_kelas.kelas2', 'tb_kelas.tanggal', 'tb_kbm.jam2', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi2', 'tb_kelas.pr2')
             ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_kelas.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_kelas.id_kbm')
             ->get();
@@ -40,7 +40,7 @@ class KelasController extends Controller
     public function kbmJam3()
     {
         $data = DB::table('tb_kelas')
-            ->select('tb_kelas.kelas', 'tb_kelas.tanggal', 'tb_kbm.jam3', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi3', 'tb_kelas.pr3')
+            ->select('tb_kelas.kelas3', 'tb_kelas.tanggal', 'tb_kbm.jam3', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi3', 'tb_kelas.pr3')
             ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_kelas.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_kelas.id_kbm')
             ->get();
@@ -50,7 +50,7 @@ class KelasController extends Controller
     public function kbmJam4()
     {
         $data = DB::table('tb_kelas')
-            ->select('tb_kelas.kelas', 'tb_kelas.tanggal', 'tb_kbm.jam4', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi4', 'tb_kelas.pr4')
+            ->select('tb_kelas.kelas4', 'tb_kelas.tanggal', 'tb_kbm.jam4', 'tb_guru.nama_guru', 'tb_kbm.tanggal', 'tb_kelas.judul_materi4', 'tb_kelas.pr4')
             ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_kelas.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_kelas.id_kbm')
             ->get();
@@ -60,7 +60,10 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'kelas' => 'required',
+            'kelas1' => 'required',
+            'kelas2' => 'required',
+            'kelas3' => 'required',
+            'kelas4' => 'required',
             'id_kbm' => 'required',
             'tanggal' => 'required',
             'id_guru' => 'required',
@@ -74,7 +77,10 @@ class KelasController extends Controller
             'pr4' => 'required'
         ]);
 
-        $kelas = $request->input('kelas');
+        $kelas1 = $request->input('kelas1');
+        $kelas2 = $request->input('kelas2');
+        $kelas3 = $request->input('kelas3');
+        $kelas4 = $request->input('kelas4');
         $id_kbm = $request->input('id_kbm');
         $tanggal = $request->input('tanggal');
         $id_guru = $request->input('id_guru');
@@ -88,7 +94,10 @@ class KelasController extends Controller
         $pr4 = $request->input('pr4');
 
         $tambah = DB::table('tb_kelas')->insert([
-            'kelas' => $kelas,
+            'kelas1' => $kelas1,
+            'kelas2' => $kelas2,
+            'kelas3' => $kelas3,
+            'kelas4' => $kelas4,
             'id_kbm' => $id_kbm,
             'id_guru' => $id_guru,
             'tanggal' => $tanggal,
