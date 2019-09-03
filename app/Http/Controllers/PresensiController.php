@@ -56,26 +56,46 @@ class PresensiController extends Controller
         return response()->json(['data' => $data]);
     }
 
+    public function show($id)
+    {
+        $data = DB::table('tb_absen')
+            ->select('nis', 'nama_siswa', 'tanggal', 'keterangan1', 'keterangan2', 'keterangan3', 'keterangan4')
+            ->where('nis', $id)
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
             'nis' => 'required',
             'nama_siswa' => 'required',
-            'keterangan' => 'required',
+            'keterangan1' => 'required',
+            'keterangan2' => 'required',
+            'keterangan3' => 'required',
+            'keterangan4' => 'required',
             'tanggal' => 'required',
+            'id_kelas' => 'required',
+            'id_kbm' => 'required'
         ]);
 
         $nis = $request->input('nis');
         $nama_siswa = $request->input('nama_siswa');
         $tanggal = $request->input('tanggal');
-        $keterangan = $request->input('keterangan');
+        $keterangan1 = $request->input('keterangan1');
+        $keterangan2 = $request->input('keterangan2');
+        $keterangan3 = $request->input('keterangan3');
+        $keterangan4 = $request->input('keterangan4');
         // $tanggal = Carbon\Carbon::now($request->input('tanggal'));
 
         $tambah = DB::table('tb_absen')->insert([
             'nis' => $nis,
             'nama_siswa' => $nama_siswa,
-            'keterangan' => $keterangan,
-            'tanggal' => $tanggal
+            'keterangan1' => $keterangan1,
+            'keterangan2' => $keterangan2,
+            'keterangan3' => $keterangan3,
+            'keterangan4' => $keterangan4,
+            'tanggal' => $tanggal,
         ]);
 
         if ($tambah) {
