@@ -71,10 +71,10 @@ class KelasController extends Controller
             'judul_materi2' => 'required',
             'judul_materi3' => 'required',
             'judul_materi4' => 'required',
-            'pr1' => 'required',
-            'pr2' => 'required',
-            'pr3' => 'required',
-            'pr4' => 'required'
+            'pr1' => 'string',
+            'pr2' => 'string',
+            'pr3' => 'string',
+            'pr4' => 'string'
         ]);
 
         $kelas1 = $request->input('kelas1');

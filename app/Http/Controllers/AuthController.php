@@ -56,7 +56,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Login success',
-                // 'data' => $user
+                'user' => $user
             ]);
         } else {
             return response()->json([
@@ -77,7 +77,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Login success',
-                // 'data' => $user
+                'user' => $user
             ]);
         } else {
             return response()->json([

@@ -25,6 +25,10 @@ $router->get('/guru/{id}', 'TeachersController@show');
 $router->post('/guru', 'TeachersController@store');
 
 $router->get('/absen', 'PresensiController@index');
+$router->get('/absen/kelas1', 'PresensiController@kelas1');
+$router->get('/absen/kelas2', 'PresensiController@kelas2');
+$router->get('/absen/kelas3', 'PresensiController@kelas3');
+$router->get('/absen/kelas4', 'PresensiController@kelas4');
 $router->get('/absen/{id}', 'PresensiController@show');
 $router->post('/absen', 'PresensiController@store');
 

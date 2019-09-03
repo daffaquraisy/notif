@@ -11,16 +11,47 @@ class PresensiController extends Controller
     public function index()
     {
         $data = DB::table('tb_absen')
-            ->select('nis', 'nama_siswa', 'keterangan', 'tanggal')
+            ->select('nis', 'nama_siswa', 'tanggal', 'keterangan1', 'keterangan2', 'keterangan3', 'keterangan4')
             ->get();
         return response()->json(['data' => $data]);
     }
 
-    public function show($id)
+    public function kelas1()
     {
         $data = DB::table('tb_absen')
-            ->select('nis', 'nama_siswa', 'tanggal', 'keterangan')
-            ->where('presensi_id', $id)
+            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_kelas.kelas1', 'tb_kbm.jam1')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
+    public function kelas2()
+    {
+        $data = DB::table('tb_absen')
+            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan2', 'tb_kelas.kelas2', 'tb_kbm.jam2')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
+    public function kelas3()
+    {
+        $data = DB::table('tb_absen')
+            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal',  'tb_absen.keterangan3', 'tb_kelas.kelas3', 'tb_kbm.jam3')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
+    public function kelas4()
+    {
+        $data = DB::table('tb_absen')
+            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan4', 'tb_kelas.kelas4', 'tb_kbm.jam4')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
             ->get();
         return response()->json(['data' => $data]);
     }
