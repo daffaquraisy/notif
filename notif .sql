@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Sep 2019 pada 02.09
+-- Waktu pembuatan: 03 Sep 2019 pada 03.04
 -- Versi server: 10.1.39-MariaDB
 -- Versi PHP: 7.3.5
 
@@ -33,16 +33,20 @@ CREATE TABLE `tb_absen` (
   `tanggal` date DEFAULT NULL,
   `nis` int(11) DEFAULT NULL,
   `nama_siswa` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
-  `keterangan` enum('presensi','ijin','sakit','alpa','dispen') COLLATE latin1_general_ci DEFAULT NULL
+  `keterangan1` enum('presensi','ijin','sakit','alpa','dispen') COLLATE latin1_general_ci DEFAULT NULL,
+  `keterangan2` enum('presensi','ijin','sakit','alpa','dispen') COLLATE latin1_general_ci DEFAULT NULL,
+  `keterangan3` enum('presensi','ijin','sakit','alpa','dispen') COLLATE latin1_general_ci DEFAULT NULL,
+  `keterangan4` enum('presensi','ijin','sakit','alpa','dispen') COLLATE latin1_general_ci DEFAULT NULL,
+  `id_kelas` char(11) COLLATE latin1_general_ci DEFAULT NULL,
+  `id_kbm` char(10) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_absen`
 --
 
-INSERT INTO `tb_absen` (`presensi_id`, `tanggal`, `nis`, `nama_siswa`, `keterangan`) VALUES
-(1, '2019-09-02', 625156, 'daffa', 'sakit'),
-(2, '2019-09-03', 635242, 'ferdi', 'sakit');
+INSERT INTO `tb_absen` (`presensi_id`, `tanggal`, `nis`, `nama_siswa`, `keterangan1`, `keterangan2`, `keterangan3`, `keterangan4`, `id_kelas`, `id_kbm`) VALUES
+(3, '2019-09-03', 456, 'Daffa', 'presensi', 'alpa', 'alpa', 'presensi', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -244,7 +248,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `tb_absen`
 --
 ALTER TABLE `tb_absen`
-  MODIFY `presensi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `presensi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_guru`
