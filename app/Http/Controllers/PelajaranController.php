@@ -5,21 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KbmController extends Controller
+class PelajaranController extends Controller
 {
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'jam' => 'required',
-            'id_pelajaran' => 'required'
+            'nama_pelajaran' => 'required'
         ]);
 
-        $jam = $request->input('jam');
+        $nama_pelajaran = $request->input('nama_pelajaran');
         $id_pelajaran = $request->input('id_pelajaran');
 
-        $tambah = DB::table('tb_kbm')->insert([
-            'jam' => $jam,
+        $tambah = DB::table('tb_pelajaran')->insert([
+            'nama_pelajaran' => $nama_pelajaran,
             'id_pelajaran' => $id_pelajaran
         ]);
 

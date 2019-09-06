@@ -11,18 +11,76 @@ class PresensiController extends Controller
     public function index()
     {
         $data = DB::table('tb_absen')
-            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_absen.keterangan2', 'tb_absen.keterangan3', 'tb_absen.keterangan4', 'tb_kelas.judul_materi1', 'tb_kelas.judul_materi2', 'tb_kelas.judul_materi3', 'tb_kelas.judul_materi4', 'tb_kelas.pr1', 'tb_kelas.pr2', 'tb_kelas.pr3', 'tb_kelas.pr4')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_absen.keterangan2', 'tb_absen.keterangan3', 'tb_absen.keterangan4', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
             ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
             ->get();
         return response()->json(['data' => $data]);
     }
 
-    public function kelas1()
+    public function getKelas1($id)
     {
         $data = DB::table('tb_absen')
-            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_kelas.kelas1', 'tb_kbm.jam1')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas', 'tb_catetan.nama_materi', 'tb_catetan.nama_pr')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
             ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
+            ->where('tb_kbm.jam', 'jam1')
+            ->where('nis', $id)
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
+    public function getKelas2($id)
+    {
+        $data = DB::table('tb_absen')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan2', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas', 'tb_catetan.nama_materi', 'tb_catetan.nama_pr')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
+            ->where('tb_kbm.jam', 'jam2')
+            ->where('nis', $id)
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
+    public function getKelas3($id)
+    {
+        $data = DB::table('tb_absen')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan3', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas', 'tb_catetan.nama_materi', 'tb_catetan.nama_pr')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
+            ->where('tb_kbm.jam', 'jam3')
+            ->where('nis', $id)
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
+    public function getKelas4($id)
+    {
+        $data = DB::table('tb_absen')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan4', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas', 'tb_catetan.nama_materi', 'tb_catetan.nama_pr')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
+            ->where('tb_kbm.jam', 'jam4')
+            ->where('nis', $id)
             ->get();
         return response()->json(['data' => $data]);
     }
@@ -30,9 +88,14 @@ class PresensiController extends Controller
     public function kelas2()
     {
         $data = DB::table('tb_absen')
-            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan2', 'tb_kelas.kelas2', 'tb_kbm.jam2')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan2', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas', 'tb_catetan.nama_materi', 'tb_catetan.nama_pr')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
             ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
+            ->where('tb_kbm.jam', 'jam2')
             ->get();
         return response()->json(['data' => $data]);
     }
@@ -40,9 +103,14 @@ class PresensiController extends Controller
     public function kelas3()
     {
         $data = DB::table('tb_absen')
-            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal',  'tb_absen.keterangan3', 'tb_kelas.kelas3', 'tb_kbm.jam3')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan3', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas', 'tb_catetan.nama_materi', 'tb_catetan.nama_pr')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
             ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
+            ->where('tb_kbm.jam', 'jam3')
             ->get();
         return response()->json(['data' => $data]);
     }
@@ -50,9 +118,14 @@ class PresensiController extends Controller
     public function kelas4()
     {
         $data = DB::table('tb_absen')
-            ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan4', 'tb_kelas.kelas4', 'tb_kbm.jam4')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan4', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas', 'tb_catetan.nama_materi', 'tb_catetan.nama_pr')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
             ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
             ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
+            ->where('tb_kbm.jam', 'jam4')
             ->get();
         return response()->json(['data' => $data]);
     }
@@ -60,49 +133,59 @@ class PresensiController extends Controller
     public function show($id)
     {
         $data = DB::table('tb_absen')
-            ->select('nis', 'nama_siswa', 'tanggal', 'keterangan1', 'keterangan2', 'keterangan3', 'keterangan4')
+            ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_absen.keterangan2', 'tb_absen.keterangan3', 'tb_absen.keterangan4', 'tb_catetan.nama_pr', 'tb_catetan.nama_materi', 'tb_kelas.nama_kelas')
+            ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
+            ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+            ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
+            ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+            ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
+            ->leftJoin('tb_catetan', 'tb_catetan.id_catetan', '=', 'tb_absen.id_catatan')
             ->where('nis', $id)
+            ->groupBy('tb_absen.tanggal')
             ->get();
-        return response()->json(['data' => $data]);
+        return response()->json($data);
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nis' => 'required',
-            'nama_siswa' => 'required',
+            'tanggal' => 'required',
             'keterangan1' => 'required',
             'keterangan2' => 'required',
             'keterangan3' => 'required',
             'keterangan4' => 'required',
-            'tanggal' => 'required',
+            'id_siswa' => 'required',
+            'id_pelajaran' => 'required',
+            'id_kbm' => 'required',
+            'id_guru' => 'required',
             'id_kelas' => 'required',
-            'id_kbm' => 'required'
+            'id_catetan' => 'required'
         ]);
 
-
-
-        $nis = $request->input('nis');
-        $nama_siswa = $request->input('nama_siswa');
         $tanggal = $request->input('tanggal');
         $keterangan1 = $request->input('keterangan1');
         $keterangan2 = $request->input('keterangan2');
         $keterangan3 = $request->input('keterangan3');
         $keterangan4 = $request->input('keterangan4');
-        $id_kelas = $request->input('id_kelas');
+        $id_siswa = $request->input('id_siswa');
+        $id_pelajaran = $request->input('id_pelajaran');
         $id_kbm = $request->input('id_kbm');
-        // $tanggal = Carbon\Carbon::now($request->input('tanggal'));
+        $id_guru = $request->input('id_guru');
+        $id_kelas = $request->input('id_kelas');
+        $id_catetan = $request->input('id_catetan');
 
         $tambah = DB::table('tb_absen')->insert([
-            'nis' => $nis,
-            'nama_siswa' => $nama_siswa,
+            'tanggal' => $tanggal,
             'keterangan1' => $keterangan1,
             'keterangan2' => $keterangan2,
             'keterangan3' => $keterangan3,
             'keterangan4' => $keterangan4,
-            'tanggal' => $tanggal,
             'id_kbm' => $id_kbm,
-            'id_kelas' => $id_kelas
+            'id_kelas' => $id_kelas,
+            'id_guru' => $id_guru,
+            'id_catetan' => $id_catetan,
+            'id_siswa' => $id_siswa,
+            'id_pelajaran' => $id_pelajaran
         ]);
 
         if ($tambah) {
@@ -123,8 +206,12 @@ class PresensiController extends Controller
         if ($request->has('q')) {
             $cari = $request->q;
             $data = DB::table('tb_absen')
-                ->select('tb_absen.nis', 'tb_absen.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_absen.keterangan2', 'tb_absen.keterangan3', 'tb_absen.keterangan4', 'tb_kelas.judul_materi1', 'tb_kelas.judul_materi2', 'tb_kelas.judul_materi3', 'tb_kelas.judul_materi4', 'tb_kelas.pr1', 'tb_kelas.pr2', 'tb_kelas.pr3', 'tb_kelas.pr4')
+                ->select('tb_siswa.nis', 'tb_siswa.nama_siswa', 'tb_absen.tanggal', 'tb_absen.keterangan1', 'tb_absen.keterangan2', 'tb_absen.keterangan3', 'tb_absen.keterangan4', 'tb_pelajaran.nama_pelajaran', 'tb_guru.nama_guru', 'tb_kelas.nama_kelas')
+                ->leftJoin('tb_siswa', 'tb_siswa.id_siswa', '=', 'tb_absen.id_siswa')
                 ->leftJoin('tb_kelas', 'tb_kelas.id_kelas', '=', 'tb_absen.id_kelas')
+                ->leftJoin('tb_guru', 'tb_guru.id_guru', '=', 'tb_absen.id_guru')
+                ->leftJoin('tb_kbm', 'tb_kbm.id_kbm', '=', 'tb_absen.id_kbm')
+                ->leftJoin('tb_pelajaran', 'tb_pelajaran.id_pelajaran', '=', 'tb_absen.id_pelajaran')
                 ->where('tb_absen.tanggal', 'LIKE', '%' . $cari . '%')
                 ->simplePaginate(20);
             return response()->json(['data' => $data]);

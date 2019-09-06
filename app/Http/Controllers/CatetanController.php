@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KbmController extends Controller
+class CatetanController extends Controller
 {
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'jam' => 'required',
-            'id_pelajaran' => 'required'
+            'pr' => 'required',
+            'judul_materi' => 'required',
+            'nama_materi' => 'required'
         ]);
 
-        $jam = $request->input('jam');
-        $id_pelajaran = $request->input('id_pelajaran');
+        $pr = $request->input('pr');
+        $nama_pr = $request->input('nama_pr');
+        $judul_materi = $request->input('judul_materi');
+        $nama_materi = $request->input('nama_materi');
 
-        $tambah = DB::table('tb_kbm')->insert([
-            'jam' => $jam,
-            'id_pelajaran' => $id_pelajaran
+        $tambah = DB::table('tb_catetan')->insert([
+            'pr' => $pr,
+            'nama_pr' => $nama_pr,
+            'judul_materi' => $judul_materi,
+            'nama_materi' => $nama_materi,
         ]);
 
         if ($tambah) {
